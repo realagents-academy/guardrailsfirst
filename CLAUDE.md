@@ -128,10 +128,14 @@ CMS, blog engine, essay archive, Substack API integration, analytics, cookie ban
 
 ## Where context lives
 
-- **In this repo**: PLAN.md (full implementation plan), README.md (setup + workflow), this file.
+- **In this repo**:
+  - `README.md` — setup-from-scratch + daily workflow + where-to-edit cheatsheet
+  - `CLAUDE.md` (this file) — brand tokens, voice, decisions, current deployed state, working-style notes
+  - `docs/PLAN.md` — frozen implementation plan from project kickoff (historical artifact; deltas live here in CLAUDE.md)
+  - `docs/TECHNICAL_DEBT.md` — **living backlog**: pre-launch blockers, deferred social icons, performance debt, brand asset gaps, DNS/infra follow-ups, future architecture (essay archive, dynamic OG, RAA umbrella site, course funnel). **Read this first** when picking up the project after time away — captures everything pending.
 - **Outside this repo (may not survive a machine format)**:
   - `~/.claude/plans/` — original plan file
   - `~/.claude/projects/<project-hash>/memory/` — auto-memory (user profile, brand, DNS, planning style memories)
   - Tell Alex to back up his entire `~/.claude/` directory before formatting if he wants those preserved.
 
-If memory is lost, this CLAUDE.md + PLAN.md should be enough to restore working context.
+If memory is lost, CLAUDE.md + docs/PLAN.md + docs/TECHNICAL_DEBT.md should be enough to restore working context.

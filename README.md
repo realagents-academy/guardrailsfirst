@@ -2,7 +2,7 @@
 
 Landing page for [guardrailsfirst.com](https://guardrailsfirst.com), a content brand under [Real Agents Academy](https://realagents.academy). Single-page Astro site, deployed to Azure Static Web Apps.
 
-> **First time on a new machine?** Skip to [Setup from scratch](#setup-from-scratch). For project context, decisions, and brand tokens, see [CLAUDE.md](./CLAUDE.md). For the full implementation plan, see [PLAN.md](./PLAN.md).
+> **First time on a new machine?** Skip to [Setup from scratch](#setup-from-scratch). For project context, decisions, and brand tokens, see [CLAUDE.md](./CLAUDE.md). For the full implementation plan, see [docs/PLAN.md](./docs/PLAN.md). For the running list of pending work and known debt, see [docs/TECHNICAL_DEBT.md](./docs/TECHNICAL_DEBT.md).
 
 ## What this is
 
@@ -95,22 +95,24 @@ Pushes to `main` trigger a deploy to Azure Static Web Apps via the GitHub Action
 
 ## Project structure
 
-See [PLAN.md](./PLAN.md#repo-structure) for the full tree and what lives where.
+See [docs/PLAN.md](./docs/PLAN.md#repo-structure) for the full tree and what lives where.
 
 Top level:
 
 ```text
 .
-├── src/                Astro components, layouts, pages, CSS
-├── public/             Static assets served as-is (favicon, og-image, logo)
-├── pictures/           Source-of-truth assets (logo PNGs) — versioned, NOT deployed
-├── astro.config.mjs    Astro build config
-├── staticwebapp.config.json  SWA security headers + routing
+├── src/                       Astro components, layouts, pages, CSS
+├── public/                    Static assets served as-is (favicon, og-image, logo)
+├── pictures/                  Source-of-truth assets (logo PNGs, brand banners) — versioned, NOT deployed
+├── docs/
+│   ├── PLAN.md                Frozen implementation plan from project kickoff
+│   └── TECHNICAL_DEBT.md      Living backlog: pending work, deferred items, future architecture
+├── astro.config.mjs           Astro build config
+├── staticwebapp.config.json   SWA security headers + routing
 ├── package.json
-├── .node-version       Node version pin (read by fnm/nvm)
-├── README.md           This file
-├── CLAUDE.md           Context for Claude Code sessions
-└── PLAN.md             Frozen implementation plan
+├── .node-version              Node version pin (read by fnm/nvm)
+├── README.md                  This file
+└── CLAUDE.md                  Context for Claude Code sessions
 ```
 
 ## License
