@@ -1,0 +1,129 @@
+---
+const SUBSTACK_URL = 'https://guardrailsfirst.substack.com';
+---
+
+<section class="hero">
+  <div class="hero__inner">
+    <img
+      src="/logo.png"
+      alt="Guardrails First monogram"
+      class="hero__logo"
+      width="128"
+      height="128"
+    />
+
+    <h1 class="hero__title">Guardrails First</h1>
+
+    <p class="hero__tagline">AI that ships in regulated enterprises.</p>
+
+    <p class="hero__subtitle">
+      By Alex Araujo. Real scenarios, real blockers, real patterns from regulated
+      enterprises.
+    </p>
+
+    <a class="hero__cta" href={SUBSTACK_URL} rel="noopener">
+      Subscribe
+    </a>
+
+    <p class="hero__explainer">
+      Weekly notes from production AI work in regulated environments. No hype, no
+      breakthroughs — just the patterns, blockers, and trade-offs that decide
+      whether a system actually ships. Aimed at architects, MCTs, and partners
+      who live in the gap between demo and deploy.
+    </p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-16) var(--space-6);
+    min-height: 70vh;
+  }
+
+  .hero__inner {
+    max-width: var(--content-width);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .hero__logo {
+    width: 96px;
+    height: 96px;
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-2);
+  }
+
+  .hero__title {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .hero__tagline {
+    font-size: var(--text-xl);
+    font-weight: 500;
+    color: var(--color-accent);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .hero__subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    max-width: 32rem;
+    margin: 0;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: var(--space-3) var(--space-8);
+    margin-top: var(--space-2);
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 600;
+    font-size: var(--text-base);
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition), transform var(--transition);
+  }
+
+  .hero__cta:hover {
+    background-color: var(--color-accent-hover);
+    color: var(--color-bg);
+    transform: translateY(-1px);
+  }
+
+  .hero__cta:active {
+    transform: translateY(0);
+  }
+
+  .hero__explainer {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    max-width: 32rem;
+    line-height: 1.65;
+    margin-top: var(--space-2);
+  }
+
+  @media (min-width: 768px) {
+    .hero__title {
+      font-size: var(--text-4xl);
+    }
+
+    .hero__tagline {
+      font-size: var(--text-2xl);
+    }
+
+    .hero__logo {
+      width: 112px;
+      height: 112px;
+    }
+  }
+</style>

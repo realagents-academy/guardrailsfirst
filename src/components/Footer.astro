@@ -1,0 +1,65 @@
+---
+import SocialIcons from './SocialIcons.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <p class="footer__bio">
+      Microsoft AI architect, MCT, Azure AI Architect, AI CERTs Advisory Board
+      member. Based in Switzerland.
+    </p>
+
+    <SocialIcons />
+
+    <p class="footer__copy">
+      © {year} Alex Araujo · Part of
+      <a href="https://realagents.academy">Real Agents Academy</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-12) var(--space-6);
+  }
+
+  .footer__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    text-align: center;
+  }
+
+  .footer__bio {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    max-width: 36rem;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .footer__copy {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .footer__copy a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 2px;
+    transition: color var(--transition), text-decoration-color var(--transition);
+  }
+
+  .footer__copy a:hover {
+    color: var(--color-accent);
+    text-decoration-color: var(--color-accent);
+  }
+</style>
