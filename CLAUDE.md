@@ -12,14 +12,28 @@ Stack: **Astro** (SSG, static HTML/CSS, zero client JS by default). Hosted on **
 
 ## Current state
 
-See `PLAN.md` for the full implementation plan. As of the last working session, we're partway through:
+**Live at <https://www.guardrailsfirst.com>** as of 2026-05-02.
+
+Done:
 
 - ✅ GitHub org `realagents-academy` created; `guardrailsfirst.com` + `realagents.academy` verified at the org level.
-- ✅ Repo `realagents-academy/guardrailsfirst` created (this one).
-- ✅ Logo asset committed at `pictures/GuardrailsFirstLogo.png` (square GF monogram, navy bg, teal strokes). No SVG yet.
-- ⏳ Astro scaffolding — pending. Next concrete step.
-- ⏳ Site build (Hero, Footer, OG metadata, favicons).
-- ⏳ SWA provisioning, custom domain DNS.
+- ✅ Repo `realagents-academy/guardrailsfirst` created.
+- ✅ Astro 6 scaffold with strict TypeScript, Inter via `@fontsource/inter`, telemetry disabled.
+- ✅ Hero, Footer, SocialIcons, Base layout, global CSS design tokens.
+- ✅ Favicons (32/192/512), apple-touch-icon (180), 1200×630 OG share card — all generated from `pictures/GuardrailsFirstLogo.png`.
+- ✅ `staticwebapp.config.json` with HSTS, strict CSP, X-Frame-Options DENY, Permissions-Policy.
+- ✅ SWA provisioned: `swa-guardrailsfirst-prod` in `rg-realagents-academy-prod`, West Europe region. Default URL: `https://agreeable-mushroom-08e58f503.<region>.azurestaticapps.net`.
+- ✅ Auto-generated GitHub Action workflow at `.github/workflows/azure-static-web-apps-agreeable-mushroom-08e58f503.yml` — deploys on every push to `main`.
+- ✅ Custom domain `www.guardrailsfirst.com` validated and TLS-issued.
+- ✅ Apex bare-domain → www redirect via Namecheap URL Redirect Record (HTTP-only — `https://guardrailsfirst.com` typed explicitly fails; standard `guardrailsfirst.com` typing works).
+- ✅ DNSSEC enabled at Namecheap on both domains (GF chain fully secure; AI's chain still propagating to SWITCH .ch parent — wait 24-48h before treating as broken).
+
+Pending:
+
+- ⏳ DNSSEC propagation for `araujoinnovations.ch` (passive — just wait and recheck dnsviz).
+- ⏳ Production Lighthouse audit on `https://www.guardrailsfirst.com` mobile profile (target ≥95 on all four).
+- ⏳ OG preview validation (LinkedIn Post Inspector, Meta Sharing Debugger, Twitter Card Validator).
+- ⏳ Tag `v1.0.0` once the above two pass.
 
 ## Brand identity (use these for ALL copy and code)
 
@@ -58,9 +72,11 @@ Sharp, opinionated, practitioner-grade. No hype. No corporate fluff.
 
 The two layers are intentionally distinct in visual identity. Don't conflate them. The umbrella org operates both; the brands stay separate to consumers.
 
-## DNS constraints — DO NOT BREAK
+## DNS state — what's actually on the zone
 
-`guardrailsfirst.com` already has live records that must remain untouched when adding web records:
+`guardrailsfirst.com` at Namecheap, with DNSSEC enabled at the registrar level. Records currently in play:
+
+**Mail / verification (do not touch — load-bearing for M365 and forwarding)**:
 
 - MX `@` — Namecheap email forwarding (`hello@guardrailsfirst.com` → `alejandro.araujo@araujoinnovations.ch`)
 - TXT `@` — M365 SPF (`v=spf1 include:spf.protection.outlook.com ...`)
@@ -69,7 +85,20 @@ The two layers are intentionally distinct in visual identity. Don't conflate the
 - CNAME `autodiscover` — M365 (if present)
 - TXT `_github-challenge-realagents-academy` — GitHub org verification
 
-Mail must keep working through any DNS change. Any new web record (SWA's apex A, www CNAME, dnsauth TXT) sits on different host labels — no conflict — but always glance at the host column before saving in Namecheap.
+**Web / live**:
+
+- CNAME `www` → `agreeable-mushroom-08e58f503.<region>.azurestaticapps.net` — routes www to SWA
+- URL Redirect Record `@` → `https://www.guardrailsfirst.com` (Permanent 301) — bare-apex redirects to www at HTTP layer
+
+**Decisions worth preserving**:
+
+- We chose **www-only as the SWA-attached domain**, not apex. Apex is handled entirely by the URL Redirect Record. This skipped the `_dnsauth` TXT validation step that apex-on-SWA would have required. Trade-off: `https://guardrailsfirst.com` typed explicitly returns no cert (HTTP-only redirect at apex). For direct typing (which defaults to HTTP first), the redirect lands correctly on HTTPS-www.
+- Mirror this pattern on any future Real Agents Academy domain — Alex's `araujoinnovations.ch` uses the same shape, and consistency across his sites is explicitly preferred.
+- Don't add A or ALIAS records on `@` — Namecheap rejects them when a URL Redirect Record exists on the same host.
+
+**Future**:
+
+- TXT `_atproto` for Bluesky domain-as-handle when that account is live.
 
 ## Live external systems
 
