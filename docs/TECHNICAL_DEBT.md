@@ -171,9 +171,21 @@ Captured under "Deferred social icons → Bluesky" above. Add when claiming the 
 
 ### Sitemap + RSS
 
-- Add `@astrojs/sitemap` integration to `astro.config.mjs`
-- Restore the `Sitemap:` line in `public/robots.txt` (currently removed because the file referenced doesn't exist yet)
-- Add `@astrojs/rss` for newsletter-style RSS feed (subscribers using readers like Feedly / Inoreader / NetNewsWire)
+**Sitemap status (2026-05-04)**: hand-written `public/sitemap.xml` shipped as part of the discoverability sweep. `Sitemap:` line restored in `public/robots.txt`. JSON-LD Person + WebSite schema added to `Base.astro` `<head>` with `sameAs` cross-link to `araujoinnovations.ch`. Cross-link to araujoinnovations.ch added in `Footer.astro`.
+
+**Still pending**:
+
+- Migrate hand-written `public/sitemap.xml` to `@astrojs/sitemap` integration when the essay archive ships — auto-generates one URL block per page, adds `lastmod` automatically. Hand-writing is fine for one page; becomes painful at N pages.
+- Add `@astrojs/rss` for newsletter-style RSS feed (subscribers using readers like Feedly / Inoreader / NetNewsWire). Trigger: when first essay lands and there's something to syndicate.
+
+### Discoverability — search registration
+
+These are user-side tasks (can't be automated from here). Run after the sitemap/JSON-LD push lands in production:
+
+1. **Google Search Console** — <https://search.google.com/search-console>. Add `guardrailsfirst.com` as a **Domain property** (covers www + apex in one). Verify via DNS TXT record. Submit `https://www.guardrailsfirst.com/sitemap.xml` (the full URL, not just filename). Then for the home page, use **URL Inspection → Request indexing**. Gemini reads Google's index — this is the main lever for AI discoverability.
+2. **Bing Webmaster Tools** — <https://www.bing.com/webmasters>. Use the one-click **Import from Google Search Console** option once GSC is set up — handles verification automatically. Submit the same sitemap URL. Bing's index feeds Perplexity, ChatGPT browse, and Microsoft Copilot.
+
+Watch indexing status in both consoles for ~7 days. First crawls usually within 24-48h after registration.
 
 ### Analytics
 

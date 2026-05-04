@@ -19,6 +19,46 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImageURL = new URL(ogImage, Astro.site).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://www.guardrailsfirst.com/#person',
+      name: 'Alex Araujo',
+      url: 'https://www.araujoinnovations.ch',
+      jobTitle: 'Microsoft AI Architect',
+      description:
+        'Microsoft AI Architect, MCT, Azure AI Architect, AI CERTs Advisory Board member. Writes Guardrails First — practitioner notes on shipping AI in regulated enterprises.',
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Real Agents Academy',
+        url: 'https://realagents.academy',
+      },
+      sameAs: [
+        'https://www.araujoinnovations.ch',
+        'https://guardrailsfirst.substack.com',
+        'https://www.youtube.com/@guardrailsfirst',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://www.guardrailsfirst.com/#website',
+      url: 'https://www.guardrailsfirst.com/',
+      name: 'Guardrails First',
+      description:
+        'Practitioner notes on shipping AI in regulated enterprises. Real scenarios, real blockers, real patterns. By Alex Araujo.',
+      inLanguage: 'en',
+      publisher: {
+        '@type': 'Organization',
+        name: 'Real Agents Academy',
+        url: 'https://realagents.academy',
+      },
+      author: { '@id': 'https://www.guardrailsfirst.com/#person' },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -54,6 +94,8 @@ const ogImageURL = new URL(ogImage, Astro.site).toString();
 
     <meta name="author" content="Alex Araujo" />
     <meta name="robots" content="index, follow" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <slot />

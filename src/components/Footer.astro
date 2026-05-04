@@ -11,6 +11,11 @@ const year = new Date().getFullYear();
       member. Based in Switzerland.
     </p>
 
+    <p class="footer__crosslink">
+      For consulting and speaking:
+      <a href="https://www.araujoinnovations.ch">araujoinnovations.ch</a>
+    </p>
+
     <SocialIcons />
 
     <p class="footer__copy">
@@ -42,6 +47,25 @@ const year = new Date().getFullYear();
     max-width: 36rem;
     margin: 0;
     line-height: 1.6;
+  }
+
+  .footer__crosslink {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .footer__crosslink a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 2px;
+    transition: color var(--transition), text-decoration-color var(--transition);
+  }
+
+  .footer__crosslink a:hover {
+    color: var(--color-accent);
+    text-decoration-color: var(--color-accent);
   }
 
   .footer__copy {
